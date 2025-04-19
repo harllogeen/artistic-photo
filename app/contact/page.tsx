@@ -344,7 +344,7 @@ export default function ContactPage() {
                       <Input
                         id="firstName"
                         name="firstName"
-                        placeholder="John"
+                        placeholder="Enter FirstName"
                         required
                         value={formData.firstName}
                         onChange={handleChange}
@@ -355,7 +355,7 @@ export default function ContactPage() {
                       <Input
                         id="lastName"
                         name="lastName"
-                        placeholder="Doe"
+                        placeholder="Enter LastName"
                         required
                         value={formData.lastName}
                         onChange={handleChange}
@@ -382,7 +382,7 @@ export default function ContactPage() {
                         id="phone"
                         name="phone"
                         type="tel"
-                        placeholder="(555) 123-4567"
+                        placeholder="Enter Phone"
                         value={formData.phone}
                         onChange={handleChange}
                       />
