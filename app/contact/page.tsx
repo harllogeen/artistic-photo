@@ -1,29 +1,45 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState, useRef } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Mail, Phone, MapPin, Send, CheckCircle2, Loader2, AlertCircle } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
-import Image from "next/image"
-import { motion } from "framer-motion"
-import emailjs from "@emailjs/browser"
+import type React from "react";
+import { useState, useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  CheckCircle2,
+  Loader2,
+  AlertCircle,
+} from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 
 // Check if we're in development/preview mode
 const isDevelopment =
-  process.env.NODE_ENV === "development" || process.env.VERCEL_ENV === "preview" || !process.env.EMAILJS_PUBLIC_KEY
+  process.env.NODE_ENV === "development" ||
+  process.env.VERCEL_ENV === "preview" ||
+  !process.env.EMAILJS_PUBLIC_KEY;
 
 export default function ContactPage() {
-  const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
-  const [errorMessage, setErrorMessage] = useState("")
-  const formRef = useRef<HTMLFormElement>(null)
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -32,45 +48,51 @@ export default function ContactPage() {
     service: "",
     message: "",
     newsletter: false,
-  })
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target
-    setFormData((prev) => ({ ...prev, [id]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
 
   const handleSelectChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, service: value }))
-  }
+    setFormData((prev) => ({ ...prev, service: value }));
+  };
 
   const handleCheckboxChange = (checked: boolean) => {
-    setFormData((prev) => ({ ...prev, newsletter: checked }))
-  }
+    setFormData((prev) => ({ ...prev, newsletter: checked }));
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setErrorMessage("")
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage("");
 
     try {
       if (isDevelopment) {
         // In development/preview mode, simulate success without sending actual emails
-        console.log("Development mode: Email would be sent with the following data:", formData)
+        console.log(
+          "Development mode: Email would be sent with the following data:",
+          formData
+        );
 
         // Simulate network delay
-        await new Promise((resolve) => setTimeout(resolve, 1500))
+        await new Promise((resolve) => setTimeout(resolve, 1500));
 
         // Show success message
-        setIsSuccess(true)
+        setIsSuccess(true);
         toast({
           title: "Demo Mode: Message received!",
-          description: "This is a simulated success response. In production, actual emails would be sent.",
-        })
+          description:
+            "This is a simulated success response. In production, actual emails would be sent.",
+        });
       } else {
         // In production mode, actually send emails
 
         // Initialize EmailJS with your public key from environment variable
-        emailjs.init(process.env.EMAILJS_PUBLIC_KEY || "")
+        emailjs.init(process.env.EMAILJS_PUBLIC_KEY || "");
 
         // Prepare template parameters
         const templateParams = {
@@ -82,10 +104,14 @@ export default function ContactPage() {
           newsletter: formData.newsletter ? "Yes" : "No",
           to_name: "Artistic Photography",
           reply_to: formData.email,
-        }
+        };
 
         // Send email using EmailJS
-        await emailjs.send(process.env.EMAILJS_SERVICE_ID || "", process.env.EMAILJS_TEMPLATE_ID || "", templateParams)
+        await emailjs.send(
+          process.env.EMAILJS_SERVICE_ID || "",
+          process.env.EMAILJS_TEMPLATE_ID || "",
+          templateParams
+        );
 
         // Send confirmation email to user
         const confirmationParams = {
@@ -93,19 +119,19 @@ export default function ContactPage() {
           to_email: formData.email,
           service: formData.service || "photography services",
           from_name: "Artistic Photography",
-        }
+        };
 
         await emailjs.send(
           process.env.EMAILJS_SERVICE_ID || "",
           process.env.EMAILJS_CONFIRMATION_TEMPLATE_ID || "",
-          confirmationParams,
-        )
+          confirmationParams
+        );
 
-        setIsSuccess(true)
+        setIsSuccess(true);
         toast({
           title: "Message sent!",
           description: "We'll get back to you as soon as possible.",
-        })
+        });
       }
 
       // Reset form after successful submission
@@ -117,29 +143,29 @@ export default function ContactPage() {
         service: "",
         message: "",
         newsletter: false,
-      })
+      });
     } catch (error) {
-      console.error("Error sending email:", error)
+      console.error("Error sending email:", error);
 
       // Set a user-friendly error message
       setErrorMessage(
-        "We couldn't send your message at this time. Please try again later or contact us directly via email or phone.",
-      )
+        "We couldn't send your message at this time. Please try again later or contact us directly via email or phone."
+      );
 
       toast({
         title: "Something went wrong",
         description: "Please try again later or contact us directly.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  }
+  };
 
   return (
     <div className="flex flex-col">
@@ -260,7 +286,7 @@ export default function ContactPage() {
             <div className="bg-card p-8 rounded-xl shadow-sm border border-l-4 border-l-gold">
               <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
 
-              {isDevelopment && (
+              {/* {isDevelopment && (
                 <div className="mb-6 p-4 bg-blue-light rounded-lg flex items-start">
                   <AlertCircle className="h-5 w-5 text-blue mr-2 mt-0.5 flex-shrink-0" />
                   <div>
@@ -271,7 +297,7 @@ export default function ContactPage() {
                     </p>
                   </div>
                 </div>
-              )}
+              )} */}
 
               {isSuccess ? (
                 <motion.div
@@ -459,13 +485,15 @@ export default function ContactPage() {
       <section className="container pb-16">
         <h2 className="text-2xl font-bold mb-6">Find Our Studio</h2>
         <div className="aspect-[16/9] w-full bg-secondary rounded-xl overflow-hidden shadow-md">
-          <Image
-            src="https://images.unsplash.com/photo-1569336415962-a4bd9f69c07a?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.0.3"
-            alt="Map location"
-            width={1600}
-            height={900}
-            className="w-full h-full object-cover"
-          />
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4034940.068370041!2d6.036170923120529!3d9.029865847390298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e0baf7da48d0d%3A0x99a8fe4168c50bc8!2sNigeria!5e0!3m2!1sen!2sng!4v1745043604366!5m2!1sen!2sng"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen={true}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
       </section>
 

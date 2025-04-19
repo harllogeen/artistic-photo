@@ -35,7 +35,7 @@ export async function sendContactEmail(data: ContactFormData) {
           ${data.service ? `<p><strong>Service Interested In:</strong> ${data.service}</p>` : ""}
           <p><strong>Message:</strong> ${data.message}</p>
           
-          <p style="margin-top: 20px;">If you have any urgent questions, please call us at +1 (555) 123-4567.</p>
+          <p style="margin-top: 20px;">If you have any urgent questions, please call us at +234 (907) 807-3945.</p>
           
           <p>Best regards,<br>
           The Artistic Photography Team</p>
@@ -48,7 +48,7 @@ export async function sendContactEmail(data: ContactFormData) {
           </div>
         </div>
       `,
-    })
+    });
 
     // Send notification email to the business
     await resend.emails.send({
