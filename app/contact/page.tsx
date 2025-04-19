@@ -168,8 +168,8 @@ export default function ContactPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            Have a question or ready to book a session? We'd love to hear from you. Fill out the form below or contact
-            us directly.
+            Have a question or ready to book a session? We'd love to hear from
+            you. Fill out the form below or contact us directly.
           </motion.p>
         </div>
       </section>
@@ -188,8 +188,9 @@ export default function ContactPage() {
             <div>
               <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
               <p className="text-muted-foreground mb-6">
-                Feel free to reach out to us through any of these channels. We're here to answer your questions and help
-                you book your perfect photography session.
+                Feel free to reach out to us through any of these channels.
+                We're here to answer your questions and help you book your
+                perfect photography session.
               </p>
             </div>
 
@@ -210,7 +211,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-medium">Phone</h3>
-                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                  <p className="text-muted-foreground">+234 (907) 807-3945</p>
                 </div>
               </div>
 
@@ -223,7 +224,7 @@ export default function ContactPage() {
                   <p className="text-muted-foreground">
                     123 Photography Lane
                     <br />
-                    New York, NY 10001
+                    Abuja
                   </p>
                 </div>
               </div>
@@ -265,8 +266,8 @@ export default function ContactPage() {
                   <div>
                     <p className="text-sm font-medium">Demo Mode Active</p>
                     <p className="text-xs text-muted-foreground">
-                      This form is running in demo mode. Emails won't actually be sent, but you'll see a success
-                      message.
+                      This form is running in demo mode. Emails won't actually
+                      be sent, but you'll see a success message.
                     </p>
                   </div>
                 </div>
@@ -281,7 +282,9 @@ export default function ContactPage() {
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/20 mb-6">
                     <CheckCircle2 className="h-8 w-8 text-green-600" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-2">Message Sent Successfully!</h3>
+                  <h3 className="text-2xl font-bold mb-2">
+                    Message Sent Successfully!
+                  </h3>
                   <p className="text-muted-foreground mb-6">
                     Thank you for contacting us.{" "}
                     {isDevelopment
@@ -289,12 +292,19 @@ export default function ContactPage() {
                       : "We've sent you a confirmation email"}{" "}
                     and will get back to you shortly.
                   </p>
-                  <Button onClick={() => setIsSuccess(false)} className="bg-teal hover:bg-opacity-90 text-white">
+                  <Button
+                    onClick={() => setIsSuccess(false)}
+                    className="bg-teal hover:bg-opacity-90 text-white"
+                  >
                     Send Another Message
                   </Button>
                 </motion.div>
               ) : (
-                <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+                <form
+                  ref={formRef}
+                  onSubmit={handleSubmit}
+                  className="space-y-6"
+                >
                   {errorMessage && (
                     <div className="p-4 bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg flex items-start">
                       <AlertCircle className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" />
@@ -355,16 +365,29 @@ export default function ContactPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="service">Service Interested In</Label>
-                    <input type="hidden" name="service" value={formData.service} />
-                    <Select onValueChange={handleSelectChange} value={formData.service}>
+                    <input
+                      type="hidden"
+                      name="service"
+                      value={formData.service}
+                    />
+                    <Select
+                      onValueChange={handleSelectChange}
+                      value={formData.service}
+                    >
                       <SelectTrigger>
                         <SelectValue placeholder="Select a service" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="portrait">Portrait Photography</SelectItem>
-                        <SelectItem value="wedding">Wedding Photography</SelectItem>
+                        <SelectItem value="portrait">
+                          Portrait Photography
+                        </SelectItem>
+                        <SelectItem value="wedding">
+                          Wedding Photography
+                        </SelectItem>
                         <SelectItem value="event">Event Photography</SelectItem>
-                        <SelectItem value="commercial">Commercial Photography</SelectItem>
+                        <SelectItem value="commercial">
+                          Commercial Photography
+                        </SelectItem>
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
@@ -390,7 +413,11 @@ export default function ContactPage() {
                       checked={formData.newsletter}
                       onCheckedChange={handleCheckboxChange}
                     />
-                    <input type="hidden" name="newsletter_value" value={formData.newsletter ? "yes" : "no"} />
+                    <input
+                      type="hidden"
+                      name="newsletter_value"
+                      value={formData.newsletter ? "yes" : "no"}
+                    />
                     <div className="grid gap-1.5 leading-none">
                       <Label
                         htmlFor="newsletter"
@@ -404,7 +431,11 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  <Button type="submit" className="bg-coral hover:bg-opacity-90 text-white" disabled={isSubmitting}>
+                  <Button
+                    type="submit"
+                    className="bg-coral hover:bg-opacity-90 text-white"
+                    disabled={isSubmitting}
+                  >
                     {isSubmitting ? (
                       <div className="flex items-center">
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -441,7 +472,9 @@ export default function ContactPage() {
       {/* FAQ Section */}
       <section className="bg-gradient-warm py-16">
         <div className="container">
-          <h2 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center">
+            Frequently Asked Questions
+          </h2>
           <div className="max-w-3xl mx-auto space-y-6">
             {[
               {
@@ -463,8 +496,13 @@ export default function ContactPage() {
                 color: "blue",
               },
             ].map((faq, index) => (
-              <div key={index} className={`bg-card p-6 rounded-lg shadow-sm border-l-4 border-${faq.color}`}>
-                <h3 className={`text-lg font-semibold mb-2 text-${faq.color}`}>{faq.question}</h3>
+              <div
+                key={index}
+                className={`bg-card p-6 rounded-lg shadow-sm border-l-4 border-${faq.color}`}
+              >
+                <h3 className={`text-lg font-semibold mb-2 text-${faq.color}`}>
+                  {faq.question}
+                </h3>
                 <p className="text-muted-foreground">{faq.answer}</p>
               </div>
             ))}
@@ -472,5 +510,5 @@ export default function ContactPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
