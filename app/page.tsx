@@ -377,21 +377,21 @@ export default function Home() {
           >
             {[
               {
-                name: "Sarah Johnson",
+                name: "Sam Piro",
                 role: "Wedding Client",
                 quote:
                   "Artistic captured our wedding day perfectly. Every emotion, every detail - they didn't miss a thing. The photos are beyond what we could have imagined.",
                 color: "teal",
               },
               {
-                name: "Michael Chen",
+                name: "Barister Ayomide",
                 role: "Corporate Client",
                 quote:
                   "Professional, punctual, and produced exceptional photos for our company event. The team was a pleasure to work with from start to finish.",
                 color: "coral",
               },
               {
-                name: "Emily Rodriguez",
+                name: "Emily Johnson",
                 role: "Portrait Session",
                 quote:
                   "I've never felt so comfortable in front of a camera. The photographer made the experience enjoyable, and the results speak for themselves. Absolutely stunning!",
